@@ -40,5 +40,8 @@ No modules.
 
 ### Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output_id) | The id of the security group |
+| <a name="output_name"></a> [name](#output_name) | The name of the security group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
