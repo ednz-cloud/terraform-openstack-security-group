@@ -9,6 +9,15 @@ variable "description" {
   default     = null
 }
 
+variable "tenant_id" {
+  type        = string
+  description = <<-EOT
+    The tenant for which to create the security group.
+    This is only required for admins creating security groups for other tenant.
+  EOT
+  default     = null
+}
+
 variable "delete_default_rules" {
   type        = bool
   description = <<-EOT
@@ -18,13 +27,26 @@ variable "delete_default_rules" {
   default     = false
 }
 
-variable "tenant_id" {
-  type        = string
+variable "ingress_rules" {
+  type        = map(map(string))
   description = <<-EOT
-    The tenant for which to create the security group.
-    This is only required for admins creating security groups for other tenant.
+    The list of ingress rules to attach to the security group.
+    You can use all regular entries from the openstack_networking_secgroup_rule_v2 resource
+    provided by the openstack provider, except region, which defaults to the region of the provider used,
+    and direction, which defaults to ingress.
+    By default, if ethertype is not specified, it will by IPv4.
   EOT
-  default     = null
+}
+
+variable "egress_rules" {
+  type        = map(map(string))
+  description = <<-EOT
+    The list of egress rules to attach to the security group.
+    You can use all regular entries from the openstack_networking_secgroup_rule_v2 resource
+    provided by the openstack provider, except region, which defaults to the region of the provider used,
+    and direction, which defaults to egress.
+    By default, if ethertype is not specified, it will by IPv4.
+  EOT
 }
 
 variable "tags" {
