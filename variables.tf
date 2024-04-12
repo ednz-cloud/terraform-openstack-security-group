@@ -36,6 +36,7 @@ variable "ingress_rules" {
     and direction, which defaults to ingress.
     By default, if ethertype is not specified, it will by IPv4.
   EOT
+  default     = {}
 }
 
 variable "egress_rules" {
@@ -47,6 +48,7 @@ variable "egress_rules" {
     and direction, which defaults to egress.
     By default, if ethertype is not specified, it will by IPv4.
   EOT
+  default     = {}
 }
 
 variable "tags" {
