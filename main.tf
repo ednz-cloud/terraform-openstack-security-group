@@ -29,7 +29,7 @@ resource "openstack_networking_secgroup_rule_v2" "ingress" {
   port_range_min   = try(each.value.port_range_min, false) != false ? each.value.port_range_min : null
   port_range_max   = try(each.value.port_range_max, false) != false ? each.value.port_range_max : null
   remote_ip_prefix = try(each.value.remote_ip_prefix, false) != false ? each.value.remote_ip_prefix : null
-  remote_group_id  = try(each.value.remote_group_id, false) != false ? each.value.remote_group_id : null
+  remote_group_id  = try(each.value.remote_group_id, false) != false ? (each.value.remote_group_id == "self" ? openstack_networking_secgroup_v2.this.id : each.value.remote_group_id) : null
 }
 
 resource "openstack_networking_secgroup_rule_v2" "egress" {
@@ -45,5 +45,5 @@ resource "openstack_networking_secgroup_rule_v2" "egress" {
   port_range_min   = try(each.value.port_range_min, false) != false ? each.value.port_range_min : null
   port_range_max   = try(each.value.port_range_max, false) != false ? each.value.port_range_max : null
   remote_ip_prefix = try(each.value.remote_ip_prefix, false) != false ? each.value.remote_ip_prefix : null
-  remote_group_id  = try(each.value.remote_group_id, false) != false ? each.value.remote_group_id : null
+  remote_group_id  = try(each.value.remote_group_id, false) != false ? (each.value.remote_group_id == "self" ? openstack_networking_secgroup_v2.this.id : each.value.remote_group_id) : null
 }
